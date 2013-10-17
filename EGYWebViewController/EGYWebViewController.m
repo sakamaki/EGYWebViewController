@@ -268,6 +268,7 @@
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
     self.navigationItem.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    [[webView scrollView] setContentOffset:CGPointMake(0, 120.f) animated:NO];
     [self updateToolbarItems];
 }
 
