@@ -8,8 +8,6 @@
 
 #import <MessageUI/MessageUI.h>
 
-#import "EGYModalWebViewController.h"
-
 @protocol EGYWebViewControllerDelegate <NSObject>
 - (void)startAnimatingIndicator;
 - (void)stopAnimatingIndicator;
