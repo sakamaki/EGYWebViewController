@@ -7,11 +7,12 @@
 //  https://github.com/iMokhles/EGYWebViewController
 
 #import <UIKit/UIKit.h>
+#import "EGYWebViewController.h"
 
 
 @class EGYWebViewController;
 
-@interface EGYModalWebViewController : UINavigationController
+@interface EGYModalWebViewController : UINavigationController <EGYWebViewControllerDelegate>
 
 - (id)initWithAddress:(NSString*)urlString;
 - (id)initWithURL:(NSURL *)URL;

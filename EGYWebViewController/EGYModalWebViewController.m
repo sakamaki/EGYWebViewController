@@ -16,7 +16,9 @@
 @end
 
 
-@implementation EGYModalWebViewController
+@implementation EGYModalWebViewController {
+    UIActivityIndicatorView *indicatorView;
+}
 
 @synthesize barsTintColor, webViewController;
 
@@ -29,8 +31,13 @@
 
 - (id)initWithURL:(NSURL *)URL {
     self.webViewController = [[EGYWebViewController alloc] initWithURL:URL];
+    self.webViewController.delegate = self;
     if (self = [super initWithRootViewController:self.webViewController]) {
+        indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         self.webViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:webViewController action:@selector(doneButtonClicked:)];
+        UIBarButtonItem *activityButtonItem = [[UIBarButtonItem alloc] initWithCustomView:indicatorView];
+        self.webViewController.navigationItem.rightBarButtonItem = activityButtonItem;
+
     }
     return self;
 }
@@ -42,5 +49,14 @@
     self.navigationBar.tintColor = self.barsTintColor;
 }
 
+#pragma mark - EGYWebViewControllerDelegate
+
+- (void)startAnimatingIndicator {
+    [indicatorView startAnimating];
+}
+
+- (void)stopAnimatingIndicator {
+    [indicatorView stopAnimating];
+}
 
 @end

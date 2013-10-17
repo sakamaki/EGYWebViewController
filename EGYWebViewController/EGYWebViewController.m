@@ -261,6 +261,7 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView {
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [self updateToolbarItems];
+    [self.delegate startAnimatingIndicator];
 }
 
 
@@ -270,11 +271,13 @@
     self.navigationItem.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     [[webView scrollView] setContentOffset:CGPointMake(0, 120.f) animated:NO];
     [self updateToolbarItems];
+    [self.delegate stopAnimatingIndicator];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     [self updateToolbarItems];
+    [self.delegate stopAnimatingIndicator];
 }
 
 #pragma mark - Target actions

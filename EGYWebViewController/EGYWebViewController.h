@@ -10,8 +10,14 @@
 
 #import "EGYModalWebViewController.h"
 
+@protocol EGYWebViewControllerDelegate <NSObject>
+- (void)startAnimatingIndicator;
+- (void)stopAnimatingIndicator;
+@end
+
 @interface EGYWebViewController : UIViewController
 
+@property (nonatomic, assign) id < EGYWebViewControllerDelegate > delegate;
 - (id)initWithAddress:(NSString*)urlString;
 - (id)initWithURL:(NSURL*)URL;
 
