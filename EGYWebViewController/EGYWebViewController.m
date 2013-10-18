@@ -264,19 +264,11 @@
     [self.delegate startAnimatingIndicator];
 }
 
-#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 
     self.navigationItem.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-        [self updateToolbarItems];
-        [[webView scrollView] setContentOffset:CGPointMake(0, 60.f) animated:NO];
-    }
-    else {
-        [[webView scrollView] setContentOffset:CGPointMake(0, 120.f) animated:NO];
-        [self updateToolbarItems];
-    }
+    [self updateToolbarItems];
     [self.delegate stopAnimatingIndicator];
 }
 
